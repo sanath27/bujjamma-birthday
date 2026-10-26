@@ -17,7 +17,6 @@
 }
 
 * { box-sizing: border-box; }
-
 html { scroll-behavior: smooth; }
 
 body {
@@ -153,7 +152,6 @@ h1 {
 }
 
 main { padding-bottom: 65px; }
-
 #journey { display: none; }
 #journey.visible { display: block; animation: fadeIn .8s ease both; }
 
@@ -249,12 +247,16 @@ main { padding-bottom: 65px; }
 }
 
 .story-reveal p { margin: 0 0 15px; }
-
 .story-reveal p:last-child { margin-bottom: 0; }
 
 .letter-section {
   margin-top: 52px;
   scroll-margin-top: 20px;
+}
+
+/* Important: keep the letter hidden until its card is clicked. */
+.letter-section[hidden] {
+  display: none !important;
 }
 
 .letter {
@@ -396,8 +398,6 @@ footer {
     <p>Three little surprises, one big place in my heart.</p>
   </div>
 
-  <!-- INTERACTIVE STORY CARDS -->
-
   <div class="story-menu">
 
     <button class="story-card" data-reveal="ourStory">
@@ -418,7 +418,7 @@ footer {
       <small>Today and always</small>
     </button>
 
-    <button class="story-card" data-reveal="yourLetter">
+    <button class="story-card" data-reveal="yourLetter" aria-expanded="false">
       <span class="emoji">💌</span>
       <strong>Your birthday letter</strong>
       <small>A little piece of my heart</small>
@@ -426,24 +426,19 @@ footer {
 
   </div>
 
-  <!-- SURPRISE 1 -->
-
-  <section class="story-reveal" id="ourStory">
+  <section class="story-reveal" id="ourStory" hidden>
     <h3>How it started ❤️</h3>
-
     <p>
       Bujjamma, mana story ela start ayindho gurthosthe
       chaala special ga anipisthundhi. Appudu manaki
       telidhu kadha, ee chinna beginning mana life lo
       entha beautiful journey ki start avuthundho. ❤️
     </p>
-
     <p>
       From that beginning to imagining our future together,
       every little step with you has become a memory
       I want to keep forever.
     </p>
-
     <p>
       <strong>And today, you're not just part of my story.
       You're the person I want beside me in all the chapters
@@ -451,30 +446,24 @@ footer {
     </p>
   </section>
 
-  <!-- SURPRISE 2 -->
-
-  <section class="story-reveal" id="specialThings">
+  <section class="story-reveal" id="specialThings" hidden>
     <h3>Why you're special to me 🥹</h3>
-
     <p>
       ♡ <strong>Your smile</strong><br>
       Nee smile chusthe naa mood entha bad ga unna
       better aipothundhi. ❤️
     </p>
-
     <p>
       ♡ <strong>Your heart</strong><br>
       Nee care, nee affection, nee way of loving me
       means so much to me.
     </p>
-
     <p>
       ♡ <strong>Being myself with you</strong><br>
       Nee daggara nenu perfect ga act cheyyalsina
       avasaram ledhu. I can just be me.
       And that feeling is priceless. ❤️
     </p>
-
     <p>
       There are so many things I love about you,
       bangaram. These are just three little reasons
@@ -482,11 +471,8 @@ footer {
     </p>
   </section>
 
-  <!-- SURPRISE 3 -->
-
-  <section class="story-reveal" id="myPromise">
+  <section class="story-reveal" id="myPromise" hidden>
     <h3>One promise for our future 💍</h3>
-
     <p>
       Bujjamma, life eppudu perfect ga untundhani
       promise cheyyalenu. Kaani difficult days lo kuda
@@ -494,19 +480,16 @@ footer {
       cheyyadaniki, mana problems ni kalisi face
       cheyyadaniki naa best isthaanu.
     </p>
-
     <p>
       Nee dreams ki support ga undali, nee happiness ni
       celebrate cheyyali, and mana relationship lo love
       tho paatu respect and trust ni kuda eppudu
       important ga choodali anedhe naa promise. ❤️
     </p>
-
     <p>
       <strong>Let's keep choosing each other,
       one day at a time. ❤️🧿</strong>
     </p>
-
     <p>
       Not just on birthdays, not just on happy days,
       but through all the ordinary little moments
@@ -514,16 +497,14 @@ footer {
     </p>
   </section>
 
-  <!-- ORIGINAL BIRTHDAY LETTER -->
-
-  <section class="letter-section" id="yourLetter">
+  <!-- The letter starts hidden and opens only when selected. -->
+  <section class="letter-section" id="yourLetter" hidden>
     <div class="section-heading">
       <h2>A Letter From My Heart 💌</h2>
       <p>Some things are easier to write when they come straight from the heart.</p>
     </div>
 
     <article class="letter">
-
       <h3>To my Bujjamma, ❤️</h3>
 
       <p>Happy Birthday, bangaram! 🥹❤️</p>
@@ -581,15 +562,11 @@ footer {
       </p>
 
       <p class="signoff">Forever yours. 🤗❤️</p>
-
     </article>
   </section>
 
-  <!-- FINAL SURPRISE -->
-
   <section class="closing">
     <h2>And one tiny birthday request… 🙈</h2>
-
     <p>
       I've given you my words and a little piece of my heart.
       But I saved one more thing to ask you in person. ❤️
@@ -603,12 +580,10 @@ footer {
       <p>
         “Bujjamma… naaku oka tight hug isthava? 🥹❤️”
       </p>
-
       <p>
         And if you feel like it…
         <strong>“Can I have a kiss?”</strong> 😘
       </p>
-
       <div class="small">
         No pressure, just love. Your smile is already a gift. ❤️
       </div>
@@ -617,9 +592,7 @@ footer {
 
 </main>
 
-<footer>
-  Made with love, just for you. ❤️
-</footer>
+<footer>Made with love, just for you. ❤️</footer>
 
 </div>
 
@@ -631,14 +604,12 @@ const symbols = ["♡", "♥", "✧"];
 
 for (let i = 0; i < 18; i++) {
   const heart = document.createElement("span");
-
   heart.className = "heart";
   heart.textContent = symbols[i % symbols.length];
   heart.style.left = Math.random() * 100 + "%";
   heart.style.fontSize = (14 + Math.random() * 20) + "px";
   heart.style.animationDuration = (12 + Math.random() * 14) + "s";
   heart.style.animationDelay = (-Math.random() * 24) + "s";
-
   hearts.appendChild(heart);
 }
 
@@ -646,7 +617,6 @@ for (let i = 0; i < 18; i++) {
 
 document.getElementById("openJourney").addEventListener("click", () => {
   const journey = document.getElementById("journey");
-
   journey.classList.add("visible");
 
   document.getElementById("openJourney").textContent =
@@ -658,35 +628,53 @@ document.getElementById("openJourney").addEventListener("click", () => {
   });
 });
 
-/* Interactive story cards */
+/* Interactive cards: show only the selected surprise. */
 
-document.querySelectorAll("[data-reveal]").forEach(button => {
+const cards = document.querySelectorAll("[data-reveal]");
+const surprises = document.querySelectorAll(".story-reveal");
+const letterSection = document.getElementById("yourLetter");
+
+cards.forEach(button => {
   button.addEventListener("click", () => {
     const targetId = button.dataset.reveal;
+    const isLetter = targetId === "yourLetter";
+    const target = isLetter
+      ? letterSection
+      : document.getElementById(targetId);
 
-    if (targetId === "yourLetter") {
-      document.getElementById("yourLetter").scrollIntoView({
+    // Clicking the currently open card closes it.
+    const wasOpen = isLetter
+      ? !letterSection.hidden
+      : target.classList.contains("visible");
+
+    // Close every surprise and reset all cards.
+    surprises.forEach(section => {
+      section.classList.remove("visible");
+      section.hidden = true;
+    });
+
+    letterSection.hidden = true;
+
+    cards.forEach(card => {
+      card.classList.remove("active");
+      card.setAttribute("aria-expanded", "false");
+    });
+
+    if (wasOpen) return;
+
+    button.classList.add("active");
+    button.setAttribute("aria-expanded", "true");
+
+    if (isLetter) {
+      letterSection.hidden = false;
+
+      letterSection.scrollIntoView({
         behavior: "smooth",
         block: "start"
       });
-
-      return;
-    }
-
-    const target = document.getElementById(targetId);
-    const wasOpen = target.classList.contains("visible");
-
-    document.querySelectorAll(".story-reveal").forEach(section => {
-      section.classList.remove("visible");
-    });
-
-    document.querySelectorAll(".story-card").forEach(card => {
-      card.classList.remove("active");
-    });
-
-    if (!wasOpen) {
+    } else {
+      target.hidden = false;
       target.classList.add("visible");
-      button.classList.add("active");
 
       target.scrollIntoView({
         behavior: "smooth",
